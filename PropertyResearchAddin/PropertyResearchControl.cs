@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PropertyResearchAddin.Presentation;
 
 namespace PropertyResearchAddin
 {
@@ -15,6 +16,7 @@ namespace PropertyResearchAddin
         public PropertyResearchControl()
         {
             InitializeComponent();
+            this.elementHost1.Child = new MainWindow();
         }
     }
 }
