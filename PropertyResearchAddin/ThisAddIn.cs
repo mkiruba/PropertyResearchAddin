@@ -1,5 +1,7 @@
-﻿using Microsoft.Office.Tools;
+﻿using Microsoft.Office.Core;
 using PropertyResearchAddin.Presentation.ViewModel;
+using Microsoft.Office.Tools;
+using CustomTaskPane = Microsoft.Office.Tools.CustomTaskPane;
 
 namespace PropertyResearchAddin
 {
@@ -12,7 +14,9 @@ namespace PropertyResearchAddin
             propertyResearchControl = new PropertyResearchControl();
             propertyResearchCtp = this.CustomTaskPanes.Add(propertyResearchControl, "Property Research Pane");
             propertyResearchCtp.Visible = true;
-            MainViewModel.ExcelApplication = Globals.ThisAddIn.Application;
+            propertyResearchCtp.Width = 500;
+            MainViewModel.ExcelWorkbook =
+                Globals.Factory.GetVstoObject(Globals.ThisAddIn.Application.ActiveWorkbook);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

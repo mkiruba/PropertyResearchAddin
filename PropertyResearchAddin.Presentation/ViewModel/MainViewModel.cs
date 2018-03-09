@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Tools.Excel;
+using PropertyResearchAddin.Presentation.ExcelFunctions;
 using PropertyResearchAddin.Service;
 using PropertyResearchAddin.Service.BO;
 
@@ -14,7 +16,7 @@ namespace PropertyResearchAddin.Presentation.ViewModel
         private string postcode;
         private string town;
         private IZooplaService zooplaService;
-        public static Application ExcelApplication { get; set; }
+        public static Workbook ExcelWorkbook { get; set; }
         public decimal Price
         {
             get => price;
@@ -52,38 +54,26 @@ namespace PropertyResearchAddin.Presentation.ViewModel
         private void BuildTable(List<PropertyDetails> propertyPrices)
         {
             //http://forum.finaquant.com/viewtopic.php?f=4&t=1276
-            //System.Data.DataTable table = new System.Data.DataTable();
-            //DataColumn column1 = new DataColumn("Address", typeof(string));
-            //DataColumn column2 = new DataColumn("UrlLink", typeof(string));
-            //DataColumn column3 = new DataColumn("Price", typeof(decimal));
+            var table = ExcelFunction.CreateDataTable<PropertyDetails>(propertyPrices);
 
-            //table.Columns.Add(column1);
-            //table.Columns.Add(column2);
-            //table.Columns.Add(column3);
-            //DataRow row;
-            //foreach (var propertyPrice in propertyPrices)
-            //{
-            //    row = table.NewRow();
-            //    row["Address"] = propertyPrice.DisplayableAddress;
-            //    row["UrlLink"] = propertyPrice.DetailsUrl;
-            //    row["Price"] = propertyPrice.Price;
-            //    table.Rows.Add(row);
-            //}
-            //Worksheet activeWorksheet = (Worksheet) ExcelApplication.ActiveSheet;
-
-            //ListObject listObject = activeWorksheet.ListObjects.AddEx(SourceType: XlListObjectSourceType.xlSrcRange, 
+            //ListObject listObject = activeWorksheet.ListObjects.AddEx(SourceType: XlListObjectSourceType.xlSrcModel,
             //    Source: ExcelApplication.Cells["A1", "C2"],
             //    XlListObjectHasHeaders: XlYesNoGuess.xlYes);
-            //listObject.Name = "PriceSummary";
-
+            //ListObject listObject = ExcelWorkbook.ActiveSheet.ListObjects.AddEx(SourceType: XlListObjectSourceType.xlSrcModel,
+            //    Source: ExcelWorkbook.ActiveSheet.Cells["A1", "C2"],
+            //    XlListObjectHasHeaders: XlYesNoGuess.xlYes);
+            Worksheet worksheet = (Worksheet)ExcelWorkbook.ActiveSheet;
+            ListObject listObject = worksheet.Controls.AddListObject(worksheet.Range["A1", "C2"], "listObject");
+            listObject.Name = "PriceSummary";
+            listObject.SetDataBinding(table);
             //activeWorksheet.ListObjects["PriceSummary"].TableStyle = "TableStyleMedium3";
-            Worksheet activeWorksheet = (Worksheet)ExcelApplication.ActiveSheet;
-            foreach (var propertyPrice in propertyPrices)
-            {
-                activeWorksheet.Cells[1, "A"] = propertyPrice.DisplayableAddress;
-                activeWorksheet.Cells[1, "B"] = propertyPrice.DetailsUrl;
-                activeWorksheet.Cells[1, "C"] = propertyPrice.Price;
-            }
+            //Worksheet activeWorksheet = (Worksheet)ExcelApplication.ActiveSheet;
+            //foreach (var propertyPrice in propertyPrices)
+            //{
+            //    activeWorksheet.Cells[1, "A"] = propertyPrice.DisplayableAddress;
+            //    activeWorksheet.Cells[1, "B"] = propertyPrice.DetailsUrl;
+            //    activeWorksheet.Cells[1, "C"] = propertyPrice.Price;
+            //}
         }
 
         public MainViewModel(IZooplaService zooplaService)

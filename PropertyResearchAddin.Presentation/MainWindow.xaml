@@ -21,7 +21,7 @@
     <Grid x:Name="LayoutRoot" DataContext="{Binding Main, Source={StaticResource Locator}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
@@ -29,14 +29,14 @@
             <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
         <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Content="Postcode"></Label>
-        <TextBox Grid.Column="1" Grid.Row="0" Height="50" Width="200"
+        <TextBox Grid.Column="1" Grid.Row="0" Height="40"
                  Margin="10" Text="{Binding Postcode, Mode=OneWayToSource}"
                  mah:TextBoxHelper.ClearTextButton="True" 
                  mah:TextBoxHelper.UseFloatingWatermark="True"
                  CharacterCasing="Upper"
                  mah:TextBoxHelper.Watermark="Postcode"></TextBox>
         <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Content="Town"></Label>
-        <TextBox Grid.Column="1" Grid.Row="1" Height="50" Width="200"
+        <TextBox Grid.Column="1" Grid.Row="1" Height="40"
                  Margin="10" Text="{Binding Town,  Mode=OneWayToSource}"
                  mah:TextBoxHelper.ClearTextButton="True" 
                  mah:TextBoxHelper.UseFloatingWatermark="True"
