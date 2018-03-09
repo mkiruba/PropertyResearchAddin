@@ -1,7 +1,10 @@
-﻿namespace PropertyResearchAddin.Service
+﻿using System.Collections.Generic;
+using PropertyResearchAddin.Service.BO;
+
+namespace PropertyResearchAddin.Service
 {
     public interface IZooplaService
     {
-        decimal GetPrice();
+        List<PropertyDetails> GetPrice(string postcode, string town);
     }
 }

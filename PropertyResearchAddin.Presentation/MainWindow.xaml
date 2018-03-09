@@ -4,10 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
-             xmlns:vm="clr-namespace:PropertyResearchAddin.Presentation.ViewModel"
-             mc:Ignorable="d ignore"
-        Height="300"
-        Width="300">
+        xmlns:vm="clr-namespace:PropertyResearchAddin.Presentation.ViewModel"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d ignore">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -20,8 +19,29 @@
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" DataContext="{Binding Main, Source={StaticResource Locator}}">
-
-       
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Content="Postcode"></Label>
+        <TextBox Grid.Column="1" Grid.Row="0" Height="50" Width="200"
+                 Margin="10" Text="{Binding Postcode, Mode=OneWayToSource}"
+                 mah:TextBoxHelper.ClearTextButton="True" 
+                 mah:TextBoxHelper.UseFloatingWatermark="True"
+                 CharacterCasing="Upper"
+                 mah:TextBoxHelper.Watermark="Postcode"></TextBox>
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Content="Town"></Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Height="50" Width="200"
+                 Margin="10" Text="{Binding Town,  Mode=OneWayToSource}"
+                 mah:TextBoxHelper.ClearTextButton="True" 
+                 mah:TextBoxHelper.UseFloatingWatermark="True"
+                 mah:TextBoxHelper.Watermark="Town"></TextBox>
+        <Button Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Content="Submit" Command="{Binding GetPropertyPriceCommand}" Height="50" Width="100"></Button>
 
     </Grid>
 </UserControl>

@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using PropertyResearchAddin.Presentation.Model;
+using PropertyResearchAddin.Service;
 
 namespace PropertyResearchAddin.Presentation.ViewModel
 {
@@ -29,14 +30,7 @@ namespace PropertyResearchAddin.Presentation.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
-                SimpleIoc.Default.Register<IDataService, Design.DesignDataService>();
-            }
-            else
-            {
-                SimpleIoc.Default.Register<IDataService, DataService>();
-            }
+            SimpleIoc.Default.Register<IZooplaService, ZooplaService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
         }
