@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using Microsoft.Office.Tools;
-using Excel = Microsoft.Office.Interop.Excel;
-using Office = Microsoft.Office.Core;
-using Microsoft.Office.Tools.Excel;
+﻿using Microsoft.Office.Tools;
+using PropertyResearchAddin.Presentation.ViewModel;
 
 namespace PropertyResearchAddin
 {
@@ -19,6 +12,7 @@ namespace PropertyResearchAddin
             propertyResearchControl = new PropertyResearchControl();
             propertyResearchCtp = this.CustomTaskPanes.Add(propertyResearchControl, "Property Research Pane");
             propertyResearchCtp.Visible = true;
+            MainViewModel.ExcelApplication = Globals.ThisAddIn.Application;
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

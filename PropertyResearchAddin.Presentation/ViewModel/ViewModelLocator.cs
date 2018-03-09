@@ -9,10 +9,8 @@
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using PropertyResearchAddin.Presentation.Model;
 using PropertyResearchAddin.Service;
 
 namespace PropertyResearchAddin.Presentation.ViewModel
