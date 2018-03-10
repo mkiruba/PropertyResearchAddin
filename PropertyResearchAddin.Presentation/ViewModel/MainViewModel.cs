@@ -17,6 +17,7 @@ namespace PropertyResearchAddin.Presentation.ViewModel
         private string town;
         private IZooplaService zooplaService;
         public static Workbook ExcelWorkbook { get; set; }
+        public static Worksheet ExcelWorksheet { get; set; }
         public decimal Price
         {
             get => price;
@@ -62,8 +63,8 @@ namespace PropertyResearchAddin.Presentation.ViewModel
             //ListObject listObject = ExcelWorkbook.ActiveSheet.ListObjects.AddEx(SourceType: XlListObjectSourceType.xlSrcModel,
             //    Source: ExcelWorkbook.ActiveSheet.Cells["A1", "C2"],
             //    XlListObjectHasHeaders: XlYesNoGuess.xlYes);
-            Worksheet worksheet = (Worksheet)ExcelWorkbook.ActiveSheet;
-            ListObject listObject = worksheet.Controls.AddListObject(worksheet.Range["A1", "C2"], "listObject");
+            //Microsoft.Office.Tools.Excel.Worksheet worksheet = (Microsoft.Office.Tools.Excel.Worksheet)ExcelWorkbook.ActiveSheet;
+            ListObject listObject = ExcelWorksheet.Controls.AddListObject(ExcelWorksheet.Range["A1", "C2"], "listObject");
             listObject.Name = "PriceSummary";
             listObject.SetDataBinding(table);
             //activeWorksheet.ListObjects["PriceSummary"].TableStyle = "TableStyleMedium3";

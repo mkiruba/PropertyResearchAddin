@@ -17,6 +17,8 @@ namespace PropertyResearchAddin
             propertyResearchCtp.Width = 500;
             MainViewModel.ExcelWorkbook =
                 Globals.Factory.GetVstoObject(Globals.ThisAddIn.Application.ActiveWorkbook);
+            MainViewModel.ExcelWorksheet =
+                Globals.Factory.GetVstoObject(Globals.ThisAddIn.Application.ActiveSheet);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
